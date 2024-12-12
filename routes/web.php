@@ -36,7 +36,9 @@ Route::prefix('admin')->as('admin.')->middleware('checkadmin')
         return view('admin.home.dboard');
     });
     Route::resource('categories',App\Http\Controllers\Admin\CategoriesController::class);
-
+    Route::get('aa',function(){
+        return ('123');
+    });
 });
 
 

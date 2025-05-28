@@ -8,7 +8,7 @@ use Str;
 class Product extends Model
 {
      protected $fillable = [
-        'name', 'slug', 'description', 'thumbnail', 'category_id', 'is_variant', 'status'
+        'name', 'slug', 'description', 'thumbnail', 'category_id', 'is_variant', 'status','price', 'stook','price_sale','decription_short'
     ];
 
     public function images()

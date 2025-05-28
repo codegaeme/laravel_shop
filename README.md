@@ -17,8 +17,8 @@ Trước khi bắt đầu, hãy đảm bảo máy tính của bạn đã cài đ
 1. **Clone repository**
 
    ```bash
-   git clone <URL_REPOSITORY>
-   cd <TÊN_THƯ_MỤC_DỰ_ÁN>
+   git clone https://github.com/codegaeme/laravel_shop
+   cd laravel_shop
    ```
 
 2. **Cài đặt các gói phụ thuộc PHP**Chạy lệnh sau để cài đặt các thư viện PHP được yêu cầu:
@@ -60,13 +60,13 @@ Trước khi bắt đầu, hãy đảm bảo máy tính của bạn đã cài đ
    php artisan migrate
    ```
 
-   Nếu dự án có dữ liệu mẫu, bạn có thể chạy seeder:
+  
 
-   ```bash
+   <!-- ```bash
    php artisan db:seed
-   ```
+   ``` -->
 
-7. **Cài đặt các gói phụ thuộc frontend (nếu có**)Nếu dự án sử dụng các tài nguyên frontend (như Vite hoặc Webpack), chạy các lệnh sau:
+<!-- 7. **Cài đặt các gói phụ thuộc frontend (nếu có**)Nếu dự án sử dụng các tài nguyên frontend (như Vite hoặc Webpack), chạy các lệnh sau:
 
    ```bash
    npm install
@@ -76,10 +76,10 @@ Trước khi bắt đầu, hãy đảm bảo máy tính của bạn đã cài đ
    Hoặc để build cho production:
 
    ```bash
-   npm run build
+   npm run build -->
    ```
 
-8. **Khởi động server**Chạy server phát triển của Laravel:
+7. **Khởi động server**Chạy server phát triển của Laravel:
 
    ```bash
    php artisan serve

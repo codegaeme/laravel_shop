@@ -114,11 +114,12 @@
                         <a href="{{ route('admin.products.edit', $product->id) }}"
                             class="btn btn-sm btn-primary">Sửa</a>
 
-                        <form action="{{ route('admin.products.delete', $product->id) }}" method="POST"
+                        <form action="{{ route('admin.products.delete') }}" method="POST"
                             style="display:inline-block"
                             onsubmit="return confirm('Bạn có chắc muốn xoá sản phẩm này?');">
                             @csrf
                             @method('DELETE')
+                            <input type="hidden" name="id" value="{{$product->id}}">
                             <button type="submit" class="btn btn-sm btn-danger">Xoá</button>
                         </form>
                     </td>

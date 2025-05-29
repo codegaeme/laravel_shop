@@ -8,7 +8,7 @@
 
         <div class="mb-3">
             <label for="name_cate" class="form-label">Tên danh mục</label>
-            <input type="text" name="name_cate" id="name_cate" class="form-control @error('name_cate') is-invalid @enderror" value="{{ old('name_cate') }}" required>
+            <input type="text" name="name_cate" id="name_cate" class="form-control @error('name_cate') is-invalid @enderror" value="{{ old('name_cate') }}" >
             @error('name_cate')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

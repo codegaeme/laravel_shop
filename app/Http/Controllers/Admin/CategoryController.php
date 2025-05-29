@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CateGoryRequest;
 use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +18,8 @@ class CategoryController extends Controller
      public function create(){
         return view('admin.categories.add');
    }
-     public function store(Request $request){
+     public function store(CateGoryRequest $request){
+        $request->validated();
         $data=[
             'name_cate'=>$request->name_cate,
             'description'=>$request->description,
@@ -38,7 +41,7 @@ class CategoryController extends Controller
             return redirect()->back()->with('error','Không tồn tại');
         }
    }
-     public function update($id, Request $request){
+     public function update($id, CateGoryRequest $request){
          $category=Category::find($id);
          if ($category) {
            $data=[
@@ -53,18 +56,27 @@ class CategoryController extends Controller
             return redirect()->back()->with('error','Không tồn tại');
         }
    }
-     public function delete(Request $request){
-        $id=$request->id;
-        $data=Category::find($id);
+public function delete(Request $request)
+{
+    $id = $request->id;
+    $category = Category::find($id);
 
-        if ($data) {
-            $data->delete();
-            return redirect()->back()->with('success','Xóa thành công');
-        }else{
-            return redirect()->back()->with('error','Xóa thất bại');
-        }
+    if (!$category) {
+        return redirect()->back()->with('error', 'Danh mục không tồn tại.');
+    }
+
+    // Kiểm tra xem còn sản phẩm nào đang dùng danh mục này không
+    $productCount = Product::where('category_id', $id)->count();
+
+    if ($productCount > 0) {
+        return redirect()->back()->with('warning', 'Danh mục này đang có sản phẩm, không thể xóa.');
+    }
 
 
-   }
+    $category->delete();
+
+    return redirect()->back()->with('success', 'Xóa danh mục thành công.');
+}
+
 
 }

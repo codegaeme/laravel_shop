@@ -1,17 +1,27 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 @php
-    $type = session()->has('success') ? 'success'
-          : (session()->has('error') ? 'danger'
-          : (session()->has('warning') ? 'warning' : null));
+    if (session()->has('success')) {
+        $typeSession = 'success';
+        $typeClass = 'success';
+    } elseif (session()->has('error')) {
+        $typeSession = 'error';
+        $typeClass = 'danger';
+    } elseif (session()->has('warning')) {
+        $typeSession = 'warning';
+        $typeClass = 'warning';
+    } else {
+        $typeSession = null;
+        $typeClass = null;
+    }
 
-    $message = session($type);
+    $message = $typeSession ? session($typeSession) : null;
 @endphp
 
-@if ($type && $message)
-    <div id="alertBox" class="custom-alert alert-{{ $type }}" role="alert">
+@if ($typeClass && $message)
+    <div id="alertBox" class="custom-alert alert-{{ $typeClass }}" role="alert">
         <div class="custom-alert-content">
-            <div class="progress-circle-wrapper {{ $type }}">
+            <div class="progress-circle-wrapper {{ $typeClass }}">
                 <svg class="progress-circle" viewBox="0 0 36 36" width="30" height="30" aria-hidden="true">
                     <path class="circle-bg"
                           d="M18 2.0845
@@ -25,14 +35,17 @@
                 </svg>
 
                 <i class="
-                    @if($type === 'success') bi bi-check-lg
-                    @elseif($type === 'danger') bi bi-x-lg
-                    @elseif($type === 'warning') bi bi-exclamation-lg
+                    @if($typeClass === 'success') bi bi-check-lg
+                    @elseif($typeClass === 'danger') bi bi-x-lg
+                    @elseif($typeClass === 'warning') bi bi-exclamation-lg
                     @endif
                 icon-inside-circle"></i>
             </div>
+            @php
+                $mauchu='text-'.$typeClass
+            @endphp
 
-            <span><strong>{{ ucfirst($type) }}:</strong> {{ $message }}</span>
+            <span class="{{$mauchu}}">{{ $message }}</span>
 
             <button class="custom-alert-close" onclick="closeAlert()">×</button>
         </div>

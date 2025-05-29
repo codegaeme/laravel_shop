@@ -111,8 +111,41 @@ public function store(Request $request)
     {
 
     }
-    public function delete()
-    {
 
+
+public function delete(Request $request)
+{
+    $id = $request->input('id');
+
+    // Tìm sản phẩm
+    $product = Product::find($id);
+
+    if (!$product) {
+        return redirect()->route('admin.products.list')->with('error', 'Sản phẩm không tồn tại.');
     }
+
+    // Xóa ảnh đại diện (thumbnail) nếu có
+    if ($product->thumbnail && Storage::disk('public')->exists($product->thumbnail)) {
+        Storage::disk('public')->delete($product->thumbnail);
+    }
+
+    // Lấy và xóa ảnh chi tiết nếu có
+    $images = ProductImage::where('product_id', $id)->get();
+    foreach ($images as $image) {
+
+        if ($image->image && Storage::disk('public')->exists($image->image)) {
+            Storage::disk('public')->delete($image->image);
+        }
+    }
+
+    // Xóa bản ghi ảnh khỏi DB
+    ProductImage::where('product_id', $id)->delete();
+
+    // Xóa sản phẩm
+    $product->delete();
+
+    return redirect()->route('admin.products.list')->with('success', 'Xóa sản phẩm thành công.');
+}
+
+
 }

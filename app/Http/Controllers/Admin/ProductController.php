@@ -7,10 +7,14 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\ProductImage;
 use Illuminate\Http\Request;
-use Str;
+use Illuminate\Support\Str;
+
 
 class ProductController extends Controller
 {
+    public function home(){
+        return view('admin.products.home');
+    }
     public function index()
     {
         $products = Product::orderBy('created_at', 'desc')->paginate(10);
@@ -95,7 +99,7 @@ public function store(Request $request)
     }
 
     // Chuyển hướng về danh sách sản phẩm với thông báo thành công
-    return redirect()->route('admin.products.list')->with('success', 'Thêm mới sản phẩm thành công!');
+    return redirect()->route('admin.products.simple.list')->with('success', 'Thêm mới sản phẩm thành công!');
 }
 
 
@@ -144,7 +148,7 @@ public function delete(Request $request)
     // Xóa sản phẩm
     $product->delete();
 
-    return redirect()->route('admin.products.list')->with('success', 'Xóa sản phẩm thành công.');
+    return redirect()->route('admin.products.simple.list')->with('success', 'Xóa sản phẩm thành công.');
 }
 
 

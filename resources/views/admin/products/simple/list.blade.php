@@ -8,7 +8,7 @@
     <h1>Danh sách sản phẩm</h1>
 
     <table class="table table-striped">
-        <a href="{{route('admin.products.create')}}" class="btn btn-primary btn-sm">Thêm mới</a>
+        <a href="{{route('admin.products.simple.create')}}" class="btn btn-primary btn-sm">Thêm mới</a>
         <thead>
             <tr>
                 <th>ID</th>
@@ -111,10 +111,10 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.products.edit', $product->id) }}"
+                        <a href="{{ route('admin.products.simple.edit', $product->id) }}"
                             class="btn btn-sm btn-primary">Sửa</a>
 
-                        <form action="{{ route('admin.products.delete') }}" method="POST"
+                        <form action="{{ route('admin.products.simple.delete') }}" method="POST"
                             style="display:inline-block"
                             onsubmit="return confirm('Bạn có chắc muốn xoá sản phẩm này?');">
                             @csrf

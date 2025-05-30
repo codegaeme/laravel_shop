@@ -32,7 +32,7 @@
      <h2 class="mb-4">Thêm sản phẩm</h2>
 
 
-     <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+     <form action="{{ route('admin.products.simple.store') }}" method="POST" enctype="multipart/form-data">
          @csrf
 
          <div class="mb-3">
